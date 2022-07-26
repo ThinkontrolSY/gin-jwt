@@ -523,7 +523,13 @@ func (mw *GinJWTMiddleware) LoginHandler(c *gin.Context) {
 		)
 	}
 
-	mw.LoginResponse(c, http.StatusOK, tokenString, expire)
+	// mw.LoginResponse(c, http.StatusOK, tokenString, expire)
+	c.JSON(http.StatusOK, gin.H{
+		"code":   http.StatusOK,
+		"token":  token,
+		"expire": expire.Format(time.RFC3339),
+		"user":   data,
+	})
 }
 
 // LogoutHandler can be used by clients to remove the jwt cookie (if set)
