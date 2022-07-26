@@ -525,10 +525,11 @@ func (mw *GinJWTMiddleware) LoginHandler(c *gin.Context) {
 
 	// mw.LoginResponse(c, http.StatusOK, tokenString, expire)
 	c.JSON(http.StatusOK, gin.H{
-		"code":   http.StatusOK,
-		"token":  tokenString,
-		"expire": expire.Format(time.RFC3339),
-		"user":   data,
+		"code":      http.StatusOK,
+		"token":     tokenString,
+		"expire":    expire.Format(time.RFC3339),
+		"expiredIn": expire.UnixMilli(),
+		"user":      data,
 	})
 }
 
